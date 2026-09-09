@@ -1,4 +1,7 @@
-import { NextResponse } from 'next/server'
+   // Force Vercel to rebuild cache
+   import { NextResponse } from 'next/server'
+   // ... rest of the code ...
+   // import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 import { sendJobEmail } from '@/lib/email'
 import { v4 as uuidv4 } from 'uuid'
