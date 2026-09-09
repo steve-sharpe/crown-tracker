@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server'
 import { prisma } from '@/lib/db'
 
-export async function PATCH(req: Request, { params }: { params: { id: string } }) {
+export async function PATCH(req: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     const { stageName, isCompleted } = await req.json()
+    const { id } = await params // <-- This line is the fix
     
     await prisma.stage.updateMany({
-      where: { jobId: params.id, stageName },
+      where: { jobId: id, stageName },
       data: {
         isCompleted,
         completedAt: isCompleted ? new Date() : null,
